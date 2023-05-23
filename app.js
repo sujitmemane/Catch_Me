@@ -23,12 +23,13 @@ const arrangeLionRandomly = () => {
 
 const countdownTimer = () => {
   timeLeftNum--;
-  timeLeft.innerHTML = `
-  Time Left ${timeLeftNum} s
-  `;
+  timeLeft.innerHTML = `Time Left ${timeLeftNum} s`;
   if (timeLeftNum === 0) {
     clearInterval(timerId);
     clearInterval(randomLionId);
+    gameBgMusic.pause();
+    // Add congratulatory message with the user's score
+    score.innerHTML = `Congratulations! Your score is ${scoreNum}`;
   }
 };
 
@@ -39,6 +40,7 @@ const startGame = () => {
   score.innerHTML = "Your score : 0";
   timeLeft.innerHTML = "Time Left : 60 s ";
   pauseGameButton.innerHTML = "Pause";
+  gameBgMusic.currentTime = 0; // Reset the background music
   gameBgMusic.play();
   randomLionId = setInterval(arrangeLionRandomly, 1000);
   timerId = setInterval(countdownTimer, 1000);
